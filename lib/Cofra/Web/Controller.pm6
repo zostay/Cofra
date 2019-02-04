@@ -7,6 +7,6 @@ unit role Cofra::Web::Controller does Cofra::Web::Godly;
 use Cofra::Web::Request;
 use Cofra::Web::Response;
 
-method rr-fire(Str:D $action, Cofra::Web::Request $r, |args --> Cofra::Web::Response) {
+multi method fire(Str:D $action, Cofra::Web::Request $r, |args --> Cofra::Web::Response) {
     self."$action"($r, |args);
 }

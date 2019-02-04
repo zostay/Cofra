@@ -24,6 +24,7 @@ method logger { $.app.logger }
 method log-error(|c) { $.app.logger.log-error(|c) }
 
 method check-access(Cofra::Web::Request:D $req --> Bool:D) {
+    # TODO Figure out how this should be implemented.
     return True without $.access-controller;
 
     !!!
@@ -33,44 +34,34 @@ method controller(Str:D $name) {
     %!controllers{ $name } // die "no controller named $name";
 }
 
-method target(Str:D $controller-name, Str:D $action, |args) {
+multi method target(&target --> Callable:D) { &target }
+
+multi method target(Str:D :$controller, Str:D :$action, |args --> Callable:D) {
+    self.target($controller, $action, |args);
+}
+
+multi method target(Str:D $controller-name, Str:D $action, |args --> Callable:D) {
     my $c = self.controller($controller-name);
-    sub (Cofra::Web::Request $r --> Cofra::Web::Response) {
+    sub (Cofra::Web::Request:D $r --> Cofra::Web::Response:D) {
         $c.fire($action, $r, |args);
     }
 }
 
-method view(Str:D $name) {
-    %!views{ $name } // die "no view named $name";
+method view(Str:D $name, Cofra::Web::Request:D $request --> Cofra::Web::View::Instance:D) {
+    my $view = %!views{ $name } // die "no view named $name";
+    $view.activate($request);
 }
 
 method request-response-dispatch(Cofra::Web::Request:D $req --> Cofra::Web::Response:D) {
-    my $res;
+    my Cofra::Web::Match $match = self.router.match($req);
 
-    try {
-        my Cofra::Web::Match $match = self.router.match($req);
+    die X::Cofra::Web::Error::NotFound.new(self, $req) without $match;
 
-        die X::Cofra::Web::Error::NotFound.new(self, $req) without $match;
+    my $match-req = $req but Cofra::Web::Request::Match[$match];
 
-        my $match-req = $req but Cofra::Web::Request::Match[$match];
+    die X::Cofra::Web::Error::Forbidden.new(self, $match-req)
+        unless self.check-access($match-req);
 
-        die X::Cofra::Web::Error::Forbidden.new(self, $match-req)
-            unless self.check-access($match-req);
-
-        $res = $match-req.target.($match-req).finalize;
-
-        CATCH {
-            when X::Cofra::Web::Error {
-                .rethrow;
-            }
-
-            default {
-                self.log-error($_);
-                X::Cofra::Web::Error.new(self, $match-req);
-            }
-        }
-    }
-
-    $res;
+    $match-req.target.($match-req);
 }
 

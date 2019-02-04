@@ -20,7 +20,6 @@ method p6wapi-request-response-dispatch(%env --> List) {
         %env<cofra.request> = $req;
 
         my $res = self.request-response-dispatch($req);
-        $res does Cofra::Web::Response::P6WAPI;
 
         CATCH {
             when X::Cofra::Web::Error {
