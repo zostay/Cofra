@@ -7,7 +7,7 @@ unit class Cofra::Logger::Screen does Cofra::Logger;
 has IO::Handle $.handle = $*ERR;
 
 method log-to-screen($level, @msg) {
-    $*ERR.say: "[$level] @msg.map(*.gist).join('')";
+    $.handle.say: "[$level] @msg.map(*.gist).join('')";
 }
 
 method is-logging-critical(--> Bool:D) { True }
