@@ -2,6 +2,6 @@ use v6;
 
 unit role Cofra::App::Godly;
 
-use Cofra::App;
+use Cofra::AppObject;
 
-has Cofra::App $.app is rw;
+has Cofra::AppObject $.app is rw handles <logger biz>;

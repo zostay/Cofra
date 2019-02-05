@@ -4,6 +4,6 @@ unit role Cofra::Singleton[Str $key];
 
 my %SINGLETONS;
 
-method instance(::?CLASS:) {
-    %SINGLETONS{ $key } //= self.new;
+method instance(::?CLASS: |args) {
+    %SINGLETONS{ $key } //= self.new(|args);
 }

@@ -5,7 +5,9 @@ use Cofra::WebObject;
 
 unit class Cofra::Web does Cofra::WebObject does Cofra::App::Godly;
 
+use Cofra::Logger;
 use Cofra::Web::Controller;
+use Cofra::Web::Controller::Error;
 use Cofra::Web::Match;
 use Cofra::Web::Request;
 use Cofra::Web::Request::Match;
@@ -17,11 +19,15 @@ use X::Cofra::Web::Error;
 has Cofra::Web::Controller %.controllers;
 has Cofra::Web::View %.views;
 has Cofra::Web::Router $.router;
+has Cofra::Web::Controller $.error-controller = Cofra::Web::Controller::Error.new;
 
 method access-controller { $.app.access-controller }
-method logger { $.app.logger }
 
-method log-error(|c) { $.app.logger.log-error(|c) }
+method log-critical(|c) { $.logger.log-critical(|c) }
+method log-error(|c) { $.logger.log-error(|c) }
+method log-warn(|c) { $.logger.log-warn(|c) }
+method log-info(|c) { $.logger.log-info(|c) }
+method log-debug(|c) { $.logger.log-debug(|c) }
 
 method check-access(Cofra::Web::Request:D $req --> Bool:D) {
     # TODO Figure out how this should be implemented.
@@ -55,11 +61,11 @@ method view(Str:D $name, Cofra::Web::Request:D $request --> Cofra::Web::View::In
 method request-response-dispatch(Cofra::Web::Request:D $req --> Cofra::Web::Response:D) {
     my Cofra::Web::Match $match = self.router.match($req);
 
-    die X::Cofra::Web::Error::NotFound.new(self, $req) without $match;
+    return self.error-controller.fire('not-found', $req) without $match;
 
     my $match-req = $req but Cofra::Web::Request::Match[$match];
 
-    die X::Cofra::Web::Error::Forbidden.new(self, $match-req)
+    return self.error-controller.fire('forbidden', $match-req)
         unless self.check-access($match-req);
 
     $match-req.target.($match-req);

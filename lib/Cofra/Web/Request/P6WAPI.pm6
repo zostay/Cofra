@@ -12,7 +12,7 @@ use Cofra::Web::Response::P6WAPI;
 has Smack::Request $.request handles <
     protocol method host port user request-uri path-info
     path query-string script-name scheme secure body
-    input session session_options logger cookies
+    input session session_options cookies
     query-parameters raw-content content headers
     body-parameters parameters param
 >;
