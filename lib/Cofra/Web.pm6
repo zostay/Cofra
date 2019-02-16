@@ -18,7 +18,7 @@ use X::Cofra::Web::Error;
 
 has Cofra::Web::Controller %.controllers;
 has Cofra::Web::View %.views;
-has Cofra::Web::Router $.router;
+has Cofra::Web::Router $.router handles <path-for>;
 has Cofra::Web::Controller $.error-controller = Cofra::Web::Controller::Error.new;
 
 method access-controller { $.app.access-controller }

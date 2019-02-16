@@ -24,7 +24,7 @@ class Instance {
 
         $.response.status = $status;
         $.response.Content-Length = 0 unless $created;
-        $.resposne.headers.Location = $uri;
+        $.response.headers.Location = $uri;
 
         $.response;
     }
