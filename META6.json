@@ -1,0 +1,34 @@
+{
+  "license": "Artistic-2.0",
+  "build-depends": [
+
+  ],
+  "resources": [
+
+  ],
+  "test-depends": [
+    "Test",
+    "Test::META"
+  ],
+  "support": {
+    "source": "git://github.com/zostay/Cofra.git"
+  },
+  "depends": [
+
+  ],
+  "provides": {
+  },
+  "description": "Common objects framework for Perl 6",
+  "version": "0.0.0",
+  "name": "Cofra",
+  "auth": "github:zostay",
+  "source-url": "git://github.com/zostay/Cofra.git",
+  "authors": [
+    "Sterling Hanenkamp <hanenkamp@cpan.org>"
+  ],
+  "tags": [
+
+  ],
+  "perl": "6.c",
+  "meta-version": "0"
+}
