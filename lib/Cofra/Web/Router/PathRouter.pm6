@@ -75,3 +75,10 @@ sub delete(+%route --> True) is export {
     $*ROUTER.add-route('DELETE', .key, .value) for %route;
 }
 
+=begin pod
+
+=head1 NAME
+
+Cofra::Web::Router::PathRouter - not yet documented
+
+=end pod

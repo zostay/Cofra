@@ -39,3 +39,10 @@ method p6wapi-request-response-dispatch(%env --> List) {
     }
 }
 
+=begin pod
+
+=head1 NAME
+
+Cofra::Web::P6WAPI - not yet documented
+
+=end pod

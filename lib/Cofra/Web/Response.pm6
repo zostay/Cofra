@@ -12,3 +12,11 @@ unit role Cofra::Web::Response;
 # method Content-Type(--> HTTP::Header:D) { ... }
 #
 # method body(--> Any:D) { ... }
+
+=begin pod
+
+=head1 NAME
+
+Cofra::Web::Response - not yet documented
+
+=end pod

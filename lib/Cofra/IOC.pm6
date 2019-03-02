@@ -40,3 +40,30 @@ my role Factory[&factory] {
 multi trait_mod:<is> (Attribute $a, :$factory!) is export {
     $a does Factory[$factory];
 }
+
+=begin pod
+
+=head1 NAME
+
+Cofra::IOC - the inversion of control part
+
+=head1 SYNOPSIS
+
+    unit class MyApp::Bodge;
+
+    use Cofra::IOC;
+    use DB-Connector-Thingy;
+
+    has Str $.database is required;
+
+    has DB-Connector-Thingy $.dbh is factory(method () {
+        DB-Connector-Thingy.new(:$.database);
+    });
+
+=head1 DESCRIPTION
+
+This class module is clearly fake news. It provides a facility for aiding the use of inversion of control through lazy initialization. However, it does nto really provide IOC.
+
+Someday, this may do that. Today, it is definitely faking.
+
+=end pod

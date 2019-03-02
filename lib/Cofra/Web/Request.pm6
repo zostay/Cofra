@@ -11,3 +11,11 @@ use Cofra::Web::Response;
 method router-context(--> Hash:D) { %() }
 
 method start-response(--> Cofra::Web::Response:D) { ... }
+
+=begin pod
+
+=head1 NAME
+
+Cofra::Web::Request - not yet documented
+
+=end pod

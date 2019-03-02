@@ -33,3 +33,11 @@ method start-response(--> Cofra::Web::Response::P6WAPI:D) {
     my $response = Smack::Response.new(:200status);
     Cofra::Web::Response::P6WAPI.new(:$response);
 }
+
+=begin pod
+
+=head1 NAME
+
+Cofra::Web::Request::P6WAPI - not yet documented
+
+=end pod

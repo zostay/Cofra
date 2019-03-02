@@ -43,3 +43,11 @@ method from-error(Cofra::Web::Response::P6WAPI:U: Exception $error --> Cofra::We
 
     Cofra::Web::Response::P6WAPI.new(:$response);
 }
+
+=begin pod
+
+=head1 NAME
+
+Cofra::Web::Response::P6WAPI - not yet documented
+
+=end pod

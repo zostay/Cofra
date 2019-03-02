@@ -11,3 +11,10 @@ method match(Cofra::Web::Request:D $request --> Cofra::Web::Match) { ... }
 
 method path-for(%mapping --> Str) { ... }
 
+=begin pod
+
+=head1 NAME
+
+Cofra::Web::Router - not yet documented
+
+=end pod

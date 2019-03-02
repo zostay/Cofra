@@ -26,3 +26,14 @@ method not-found(Cofra::Web::Request:D $req) is action {
     die X::Cofra::Web::Error::NotFound.new($.web, $req);
 }
 
+=begin pod
+
+=head1 NAME
+
+Cofra::Web::Controller::Error - the very special error controller
+
+=head1 DESCRIPTION
+
+I will document this some other time.
+
+=end pod
