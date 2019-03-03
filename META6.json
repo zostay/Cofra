@@ -1,18 +1,12 @@
 {
   "license": "Artistic-2.0",
+  "authors": [
+    "Sterling Hanenkamp <hanenkamp@cpan.org>"
+  ],
+  "version": "0.0.1",
   "build-depends": [
-
+    
   ],
-  "resources": [
-
-  ],
-  "test-depends": [
-    "Test",
-    "Test::META"
-  ],
-  "support": {
-    "source": "git://github.com/zostay/Cofra.git"
-  },
   "depends": [
     "HTTP::Headers",
     "HTTP::Status",
@@ -20,55 +14,61 @@
     "Path::Router",
     "Smack"
   ],
-  "provides": {
-      "Cofra": "lib/Cofra.pm6",
-      "X::Cofra::Web::Error": "lib/X/Cofra/Web/Error.pm6",
-      "X::Cofra::Web::Error::BadRequest": "lib/X/Cofra/Web/Error.pm6",
-      "X::Cofra::Web::Error::Unauthorized": "lib/X/Cofra/Web/Error.pm6",
-      "X::Cofra::Web::Error::Forbidden": "lib/X/Cofra/Web/Error.pm6",
-      "X::Cofra::Web::Error::NotFound": "lib/X/Cofra/Web/Error.pm6",
-      "X::Cofra::Error": "lib/X/Cofra/Error.pm6",
-      "Cofra::WebObject": "lib/Cofra/WebObject.pm6",
-      "Cofra::Logger": "lib/Cofra/Logger.pm6",
-      "Cofra::Logger::Screen": "lib/Cofra/Logger/Screen.pm6",
-      "Cofra::App::Godly": "lib/Cofra/App/Godly.pm6",
-      "Cofra::App": "lib/Cofra/App.pm6",
-      "Cofra::Web::Controller": "lib/Cofra/Web/Controller.pm6",
-      "Cofra::Web::Response::P6WAPI": "lib/Cofra/Web/Response/P6WAPI.pm6",
-      "Cofra::Web::P6WAPI": "lib/Cofra/Web/P6WAPI.pm6",
-      "Cofra::Web::Match::PathRouterRouteMatch": "lib/Cofra/Web/Match/PathRouterRouteMatch.pm6",
-      "Cofra::Web::Response": "lib/Cofra/Web/Response.pm6",
-      "Cofra::Web::Controller::Error": "lib/Cofra/Web/Controller/Error.pm6",
-      "Cofra::Web::Request": "lib/Cofra/Web/Request.pm6",
-      "Cofra::Web::Godly": "lib/Cofra/Web/Godly.pm6",
-      "Cofra::Web::View": "lib/Cofra/Web/View.pm6",
-      "Cofra::Web::View::Instance": "lib/Cofra/Web/View.pm6",
-      "Cofra::Web::Router": "lib/Cofra/Web/Router.pm6",
-      "Cofra::Web::View::JSON": "lib/Cofra/Web/View/JSON.pm6",
-      "Cofra::Web::View::JSON::Instance": "lib/Cofra/Web/View/JSON.pm6",
-      "Cofra::Web::Match": "lib/Cofra/Web/Match.pm6",
-      "Cofra::Web::Request::P6WAPI": "lib/Cofra/Web/Request/P6WAPI.pm6",
-      "Cofra::Web::Request::Match": "lib/Cofra/Web/Request/Match.pm6",
-      "Cofra::Web::Router::PathRouter": "lib/Cofra/Web/Router/PathRouter.pm6",
-      "Cofra::AccessController": "lib/Cofra/AccessController.pm6",
-      "Cofra::Context": "lib/Cofra/Context.pm6",
-      "Cofra::IOC": "lib/Cofra/IOC.pm6",
-      "Cofra::Biz": "lib/Cofra/Biz.pm6",
-      "Cofra::AppObject": "lib/Cofra/AppObject.pm6",
-      "Cofra::Web": "lib/Cofra/Web.pm6",
-      "Cofra::Singleton": "lib/Cofra/Singleton.pm6"
-  },
-  "description": "Common objects framework for Perl 6",
-  "version": "0.0.0",
-  "name": "Cofra",
-  "auth": "github:zostay",
-  "source-url": "git://github.com/zostay/Cofra.git",
-  "authors": [
-    "Sterling Hanenkamp <hanenkamp@cpan.org>"
-  ],
+  "meta-version": "0",
   "tags": [
-
+    
   ],
+  "description": "Common objects framework for Perl 6",
+  "resources": [
+    
+  ],
+  "source-url": "git://github.com/zostay/Cofra.git",
+  "provides": {
+    "X::Cofra::Web::Error::BadRequest": "lib/X/Cofra/Web/Error.pm6",
+    "X::Cofra::Web::Error::NotFound": "lib/X/Cofra/Web/Error.pm6",
+    "X::Cofra::Error": "lib/X/Cofra/Error.pm6",
+    "Cofra::Logger::Screen": "lib/Cofra/Logger/Screen.pm6",
+    "Cofra::Web::Godly": "lib/Cofra/Web/Godly.pm6",
+    "Cofra::Singleton": "lib/Cofra/Singleton.pm6",
+    "Cofra::Web::Request::Match": "lib/Cofra/Web/Request/Match.pm6",
+    "Cofra::Biz": "lib/Cofra/Biz.pm6",
+    "Cofra::Web": "lib/Cofra/Web.pm6",
+    "Cofra::WebObject": "lib/Cofra/WebObject.pm6",
+    "Cofra::Logger": "lib/Cofra/Logger.pm6",
+    "Cofra::Web::Controller": "lib/Cofra/Web/Controller.pm6",
+    "Cofra::Web::Controller::Error": "lib/Cofra/Web/Controller/Error.pm6",
+    "Cofra::Web::View": "lib/Cofra/Web/View.pm6",
+    "X::Cofra::Web::Error::Unauthorized": "lib/X/Cofra/Web/Error.pm6",
+    "Cofra::App": "lib/Cofra/App.pm6",
+    "Cofra::Web::Match::PathRouterRouteMatch": "lib/Cofra/Web/Match/PathRouterRouteMatch.pm6",
+    "Cofra::Web::Request": "lib/Cofra/Web/Request.pm6",
+    "Cofra::Web::View::Instance": "lib/Cofra/Web/View.pm6",
+    "Cofra::AppObject": "lib/Cofra/AppObject.pm6",
+    "Cofra::App::Godly": "lib/Cofra/App/Godly.pm6",
+    "Cofra": "lib/Cofra.pm6",
+    "Cofra::Web::P6WAPI": "lib/Cofra/Web/P6WAPI.pm6",
+    "Cofra::Web::Response": "lib/Cofra/Web/Response.pm6",
+    "Cofra::AccessController": "lib/Cofra/AccessController.pm6",
+    "Cofra::IOC": "lib/Cofra/IOC.pm6",
+    "X::Cofra::Web::Error::Forbidden": "lib/X/Cofra/Web/Error.pm6",
+    "Cofra::Web::Response::P6WAPI": "lib/Cofra/Web/Response/P6WAPI.pm6",
+    "Cofra::Web::View::JSON": "lib/Cofra/Web/View/JSON.pm6",
+    "Cofra::Web::Match": "lib/Cofra/Web/Match.pm6",
+    "Cofra::Web::Request::P6WAPI": "lib/Cofra/Web/Request/P6WAPI.pm6",
+    "Cofra::Web::Router::PathRouter": "lib/Cofra/Web/Router/PathRouter.pm6",
+    "Cofra::Context": "lib/Cofra/Context.pm6",
+    "X::Cofra::Web::Error": "lib/X/Cofra/Web/Error.pm6",
+    "Cofra::Web::Router": "lib/Cofra/Web/Router.pm6",
+    "Cofra::Web::View::JSON::Instance": "lib/Cofra/Web/View/JSON.pm6"
+  },
+  "auth": "github:zostay",
+  "name": "Cofra",
   "perl": "6.c",
-  "meta-version": "0"
+  "support": {
+    "source": "git://github.com/zostay/Cofra.git"
+  },
+  "test-depends": [
+    "Test",
+    "Test::META"
+  ]
 }
