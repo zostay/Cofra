@@ -14,7 +14,11 @@
     "source": "git://github.com/zostay/Cofra.git"
   },
   "depends": [
-
+    "HTTP::Headers",
+    "HTTP::Status",
+    "JSON::Fast",
+    "Path::Router",
+    "Smack"
   ],
   "provides": {
       "Cofra": "lib/Cofra.pm6",
