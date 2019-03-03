@@ -45,4 +45,27 @@ method p6wapi-request-response-dispatch(%env --> List) {
 
 Cofra::Web::P6WAPI - not yet documented
 
+=head1 DESCRIPTION
+
+This provides the tooling to wrap the dispatch methods of L<Cofra::Web> and
+adapts those methods to work with a P6WAPI server.
+
+=head1 METHODS
+
+=head2 method p6wapi-request-response-dispatch
+
+    method p6wapi-request-response-disaptch(%env --> List)
+
+This is a partial implementation of a P6WAPI request-response method. The
+difference is that this is a method requiring an invocant and it does not return
+asynchronously. This code will turn it into a proper P6WAPI request-response method:
+
+    sub (%env --> Promise) {
+        start {
+            $web.p6wapi-request-response-dispatch(%env);
+        }
+    }
+
+
+
 =end pod

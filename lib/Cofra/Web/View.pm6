@@ -43,3 +43,34 @@ class Instance {
 method activate(Cofra::Web::Request:D $request --> Cofra::Web::View::Instance:D) {
     ...
 }
+
+=begin pod
+
+=head1 NAME
+
+Cofra::Web::View - the interface for presenting output to web clients
+
+=head1 DESCRIPTION
+
+Views are hard, especially for engineers. In fact, unless your view is just a
+storage format like CSV or JSON, you probably don't want engineers having much
+to do with your views. I've seen what happens when engineers are involved
+several times and it was not pretty in every case, literally. However, this
+design will not save you from engineers uglifying your application. Sorry,
+you'll have to figure out that on your own.
+
+That this does do is provide an interface for taking the output of your business
+logic functions and turn it into some sort of form that can be sent over a
+socket connection. Whether that's purely functional or informatically beautiful
+depends completely on which view implementation you use (and maybe whether you
+let engineers near your presentaiton layer, but I digress, again).
+
+=head1 METHODS
+
+=head2 method activate
+
+    method activate(Cofra::Web::Request:D $request --> Cofra::Web::View::Instance:D)
+
+
+
+=end pod

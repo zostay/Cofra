@@ -13,6 +13,9 @@ has Smack::Response $.response handles <
 >;
 
 method from-error(Cofra::Web::Response::P6WAPI:U: Exception $error --> Cofra::Web::Response::P6WAPI) {
+
+    # TODO .from-error really ought to be pulled up into Cofra::Web::Response.
+
     my $response = do given $error {
         when X::Cofra::Web::Error {
             my $headers = HTTP::Headers.new;
@@ -48,6 +51,28 @@ method from-error(Cofra::Web::Response::P6WAPI:U: Exception $error --> Cofra::We
 
 =head1 NAME
 
-Cofra::Web::Response::P6WAPI - not yet documented
+Cofra::Web::Response::P6WAPI - web responses to P6WAPI servers
+
+=head1 DESCRIPTION
+
+This implements the L<Cofra::Web::Response> interface for P6WAPI servers.
+
+=head1 METHOD
+
+=head2 method response
+
+    has Smack::Response $.response handles <
+        status headers header Content-Length Content-Type body
+        redirect finalize to-app
+    >;
+
+Provides the implementation of most the methods in this class by delegating them
+to a wrapped L<Smack::Response> object.
+
+=head2 method from-error
+
+    method from-error(Cofra::Web::Response::P6WAPI:U: Exception $error --> Cofra::Web::Response::P6WAPI)
+
+This can generate a P6WAPI response from any exception.
 
 =end pod
