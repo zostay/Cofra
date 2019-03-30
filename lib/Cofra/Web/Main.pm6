@@ -26,7 +26,7 @@ has Cofra::Web $.web is constructed(dep('web-class')) is construction-args({
     views            => dep,
     router           => dep,
     error-controller => dep,
-}) is post-initialized(anon method initialize-web {
+}) is post-initialized(anon method initialize-web(Cofra::Web:D:) {
     .web = self for |%.controllers.values, |%.views.values, $.router, $.error-controller;
 });
 

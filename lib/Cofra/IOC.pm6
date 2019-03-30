@@ -32,18 +32,18 @@ class Acquirer {
 }
 
 my role HasConstructionArgs {
-    method construction-args(Any:D $obj --> Capture:D) { ... }
+    method construction-args(Any:D $container --> Capture:D) { ... }
 
-    method resolved-construction-args(Any:D $obj, :$attribute, :$name --> Capture:D) {
+    method resolved-construction-args(Any:D $container, :$attribute, :$name --> Capture:D) {
         my \raw = self.construction-args(
-            self,
+            $container,
             :$attribute,
             :$name,
         );
 
         my sub resolver($_, :$name, :$pos) {
             when Dependency {
-                .resolve($obj, :$name, :$pos);
+                .resolve($container, :$name, :$pos);
             }
             default { $_ }
         }
@@ -61,12 +61,12 @@ my role HasConstructionArgs {
 }
 
 my role HasExplicitConstructionArgs[Capture $args] does HasConstructionArgs {
-    method construction-args(Any:D $obj --> Capture:D) { $args }
+    method construction-args(Any:D $container --> Capture:D) { $args }
 }
 
 my role HasCallableConstructionArgs[&args] does HasConstructionArgs {
-    method construction-args(Any:D $obj, :$attribute, :$name --> Capture:D) {
-        $obj.&args(:$attribute, :$name);
+    method construction-args(Any:D $container, :$attribute, :$name --> Capture:D) {
+        $container.&args(:$attribute, :$name);
     }
 }
 
