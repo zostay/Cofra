@@ -41,16 +41,20 @@ my role HasConstructionArgs {
             :$name,
         );
 
-        my sub resolver($_) {
+        my sub resolver($_, :$name, :$pos) {
             when Dependency {
-                .resolve($obj, :$attribute, :$name);
+                .resolve($obj, :$name, :$pos);
             }
             default { $_ }
         }
 
         my (@list, %hash);
-        @list = raw.list.map(&resolver);
-        %hash = raw.hash.map({ .key => resolver(.value) });
+        @list = raw.list.kv.map(-> $pos, $v {
+            resolver($v, :$pos)
+        });
+        %hash = raw.hash.kv.map(-> $name, $v {
+            $name => resolver($v, :$name)
+        });
 
         Capture.new(:@list, :%hash);
     }
@@ -73,7 +77,7 @@ multi dep(Str:D $name --> Dependency:D) {
 }
 
 multi trait_mod:<is> (Attribute $a, Capture :$construction-args) {
-    $a does HasExplicitConstructionArgs($construction-args);
+    $a does HasExplicitConstructionArgs[$construction-args];
 }
 
 multi trait_mod:<is> (Attribute $a, :&construction-args) {
@@ -86,8 +90,8 @@ multi trait_mod:<is> (Attribute $a, :$construction-args) {
 }
 
 my role PostInitializer[&do-init] {
-    method post-initialize(Any $c, Any $obj, Attribute:D :$attribute, Str:D :$name) {
-        do-init($c, $obj, :$attribute, :$name);
+    method post-initialize(Any $obj, Attribute:D :$attribute, Str:D :$name) {
+        do-init($obj, :$attribute, :$name);
     }
 }
 
@@ -134,7 +138,7 @@ my role LazyConstruction[Str:D $trait] {
                         );
 
                         if $attribute ~~ PostInitializer {
-                            $attribute.post-initialize(self, $obj, :$name, :$attribute);
+                            $attribute.post-initialize($obj, :$name, :$attribute);
                         }
 
                         $attribute.set_value(
@@ -179,10 +183,10 @@ my role Constructed[Mu $c] does LazyConstruction['constructed'] {
         anon method constructed-lazy-builder(Capture :$args, :$attribute, :$name) {
             my $class = $c;
             if $class ~~ Dependency {
-                $class.resolve(self, :$attribute, :$name);
+                $class .= resolve(self, :$attribute, :$name);
             }
 
-            if $class =:= Mu {
+            if $class =:= Mu || ($class ~~ Bool && $class == True) {
                 $class = $attribute.type;
                 $class.new(|$args);
             }
@@ -302,8 +306,8 @@ When a dependency is resolved, it will be resolved by calling a method with no a
 
 After the lazy constructor is finished, this trait can be attached to the attribute to perform some followup initializaiton. The C<&post-initialized> routine will be called as follows:
 
-    self.post-initialized($obj, :$attribute, :$name);
+    $obj.post-initialized(:$attribute, :$name);
 
-Here the C<self> is the IOC container object, the C<$obj> is the newly constructed object that will be assigned to the attribute. The C<$attribute> is the C<Attribute> being set and C<$name> is the name of the attribute with the sigils and twigils left off the front.
+Here the C<self> is the newly constructed object that will be assigned to the attribute. The C<$attribute> is the C<Attribute> being set and C<$name> is the name of the attribute with the sigils and twigils left off the front.
 
 =end pod
