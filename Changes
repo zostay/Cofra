@@ -1,4 +1,4 @@
-{{$NEXT}}
+v0.0.2	2019-03-30
 
     * Expanding inversion of control because writing each of these config
       classes is tedious.
