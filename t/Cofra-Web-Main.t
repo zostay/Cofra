@@ -3,6 +3,8 @@ use v6;
 use Test;
 
 use Cofra::App;
+use Smack::Runner;
+
 class TestApp is Cofra::App { }
 
 use Cofra::Biz;
@@ -74,5 +76,8 @@ ok $main.views.defined;
 isa-ok $main.views, Hash;
 isa-ok $main.views<JSON>, Cofra::Web::View::JSON;
 is $main.views<JSON>.web, $main.web;
+
+ok $main.web-server.defined;
+isa-ok $main.web-server, Smack::Runner;
 
 done-testing;

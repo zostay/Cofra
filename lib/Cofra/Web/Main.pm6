@@ -1,5 +1,11 @@
 use v6;
 
+# This resolves some weird Perl6 bug that otherwsise causes some members to
+# fail with the mysterious:
+#
+# Cannot invoke this object (REPR: Null; VMNull)
+no precompilation;
+
 use Cofra::Main;
 
 unit class Cofra::Web::Main is Cofra::Main;
