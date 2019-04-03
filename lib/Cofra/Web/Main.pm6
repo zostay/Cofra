@@ -36,9 +36,10 @@ has Str $.host = 'localhost';
 has Int $.port = 5000;
 
 has &.web-app is factory(anon method build-app {
+    my $web = $.web;
     sub (%env) {
         start {
-            [ 200, [ Content-Type => 'text/plain' ], 'Hello World' ];
+            $web.p6wapi-request-response-dispatch(%env);
         }
     }
 });
