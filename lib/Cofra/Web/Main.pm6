@@ -36,7 +36,10 @@ has Cofra::Web $.web is constructed(dep('web-class')) is construction-args({
     .web = self for |%.controllers.values, |%.views.values, $.router, $.error-controller;
 });
 
-method web-class(Cofra::Web::Main:D:) { Cofra::Web }
+method web-class(Cofra::Web::Main:D:) {
+    use Cofra::Web::P6WAPI;
+    class :: is Cofra::Web does Cofra::Web::P6WAPI { }
+}
 
 has Str $.host = 'localhost';
 has Int $.port = 5000;

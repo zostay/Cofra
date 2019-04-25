@@ -4,6 +4,16 @@ unit module Cofra::IOC;
 
 use X::Cofra::Error;
 
+class GLOBAL::X::Cofra::IOC is X::Cofra::Error { }
+class GLOBAL::X::Cofra::IOC::Retrait is X::Cofra::IOC { }
+class GLOBAL::X::Cofra::IOC::Acquisition is X::Cofra::IOC {
+    has Str $.name is required;
+
+    method message(--> Str:D) {
+        $.cause // "$.name cannot be acquired"
+    }
+}
+
 role Dependency {
     method resolve(Any:D $obj, :$name --> Any) {
         $*IOC.get($name);
@@ -26,7 +36,7 @@ class Acquirer {
             $!root."$name"();
         }
         else {
-            die X::Cofra::Error::IOC::Acquisition.new;
+            die X::Cofra::IOC::Acquisition.new(:$name);
         }
     }
 }
@@ -158,10 +168,6 @@ my role LazyConstruction[Str:D $trait] {
 my role Factory[&factory] does LazyConstruction['factory'] {
     method lazy-builder(--> Method:D) { &factory }
 }
-
-class GLOBAL::X::Cofra::IOC is X::Cofra::Error { }
-class GLOBAL::X::Cofra::IOC::Retrait is X::Cofra::IOC { }
-class GLOBAL::X::Cofra::IOC::Acquisition is X::Cofra::IOC { }
 
 my sub check-for-lazy-construction-trait(Attribute $a, Str:D $trait) {
     if $a ~~ LazyConstruction {
