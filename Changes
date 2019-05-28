@@ -1,3 +1,5 @@
+{{$NEXT}}
+
 v0.1.0	2019-05-28
 
     * Bugfix: Some classes were missing from the META and were not getting
