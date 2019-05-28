@@ -1,5 +1,11 @@
 {{$NEXT}}
 
+    * Bugfix: Some classes were missing from the META and were not getting
+      installed correctly by zef.
+    * Add a new view that uses JSON::Marshal, which works better with general
+      objects.
+    * Some improvements to exceptions. 
+
 v0.0.2	2019-03-30
 
     * Expanding inversion of control because writing each of these config
