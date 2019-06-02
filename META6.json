@@ -14,6 +14,7 @@
   ],
   "name": "Cofra",
   "provides": {
+    "Cofra::Web::View::JSONMarshal": "lib/Cofra/Web/View/JSONMarshal.pm6",
     "X::Cofra::Web::Error": "lib/X/Cofra/Web/Error.pm6",
     "X::Cofra::Web::Error::BadRequest": "lib/X/Cofra/Web/Error.pm6",
     "Cofra::Web::View::Instance": "lib/Cofra/Web/View.pm6",
@@ -64,13 +65,13 @@
   ],
   "source-url": "git://github.com/zostay/Cofra.git",
   "resources": [
-    
+
   ],
   "build-depends": [
-    
+
   ],
   "meta-version": "0",
   "tags": [
-    
+
   ]
 }
