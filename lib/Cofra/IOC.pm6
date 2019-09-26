@@ -28,6 +28,18 @@ class NamedDependency does Dependency {
     }
 }
 
+class DeepNamedDependency does Dependency {
+    has @.names;
+
+    method resolve(Any:D $obj --> Any) {
+        my $current = $obj;
+        for @.names -> $name {
+            $current = try $current."$name"()
+        }
+        $current;
+    }
+}
+
 class Acquirer {
     has $.root;
 
@@ -84,6 +96,9 @@ proto dep(|) is export { * }
 multi dep(--> Dependency:D) { Dependency.new }
 multi dep(Str:D $name --> Dependency:D) {
     NamedDependency.new(:$name);
+}
+multi dep(*@names --> Dependency:D) {
+    DeepNamedDependency.new(:@names);
 }
 
 multi trait_mod:<is> (Attribute $a, Capture :$construction-args) {
@@ -301,10 +316,38 @@ If you pass a routine, it is called with the C<$attribute> being constructed and
 
     multi sub dep()
     multi sub dep(Str:D $name)
+    multi sub dep(@names)
 
 This is a specialized subroutine that should only be used within the parts of the IOC tooling that are able to handle dependencies.
 
-When a dependency is resolved, it will be resolved by calling a method with no arguments on the IOC container. If a C<$name> is passed, it will be the named method. If not name is given, the name of the named argument being set will be used as the name to call.
+When a dependency is resolved, it will be resolved by calling a method with no arguments on the IOC container. For example, for a simple dependency, you might use:
+
+    has $.setting = 42;
+    has MyFoo $.cons is constructed is construction-args({
+        setting => dep,
+    });
+
+If a C<$name> is passed, it will be the named method. If not name is given, the name of the named argument being set will be used as the name to call. For example,
+
+    has $.setting = 42;
+    has MyBar $.cons is constructed is construction-args({
+        wibble-setting => dep('setting'),
+    });
+
+If a list of C<@names> is passed, the first name given will be used as a method call on object. Then, the second element will be used as a method on the returned object, and so on. For example,
+
+    class MyInnerSettings {
+        has Int $.number-value;
+    }
+
+    class MySettings {
+        has MyInnerSettings $.inner;
+    }
+
+    has MySettings $.setting is constructed;
+    has MyBaz $.cons is constructed is construction-args({
+        number-value => dep(<setting inner number-value>),
+    });
 
 =head2 trait is post-initialized
 

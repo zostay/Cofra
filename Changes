@@ -1,5 +1,7 @@
 {{$NEXT}}
 
+    * Added deeply nested dependencies to Cofra::IOC
+
 v0.1.1	2019-06-01
 
     * Bufix: More classes were missing from the META and were not getting
