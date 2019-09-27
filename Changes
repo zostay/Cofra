@@ -1,4 +1,4 @@
-{{$NEXT}}
+v0.2.0	2019-09-27
 
     * Added deeply nested dependencies to Cofra::IOC
 
