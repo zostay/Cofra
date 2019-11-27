@@ -9,7 +9,7 @@
   "authors": [
     "Sterling Hanenkamp <hanenkamp@cpan.org>"
   ],
-  "description": "Common objects framework for Perl 6",
+  "description": "Common objects framework for Raku",
   "provides": {
     "Cofra::Web::View::JSON::Instance": "lib/Cofra/Web/View/JSON.pm6",
     "Cofra::IOC": "lib/Cofra/IOC.pm6",

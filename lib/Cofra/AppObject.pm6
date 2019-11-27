@@ -12,7 +12,7 @@ Cofra::AppObject - magic helper role for Cofra::App
 
 =head1 DESCRIPTION
 
-Circular dependencies in Perl 6 are frowned upon, that is to say, they don't
+Circular dependencies in Raku are frowned upon, that is to say, they don't
 work, at all. This role exists purely to provide the magic mojo to allow a
 circular dependency with L<Cofra::App> and some other modules.
 

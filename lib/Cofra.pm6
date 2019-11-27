@@ -6,7 +6,7 @@ unit module Cofra:ver<0.2.0>:auth<github:zostay>;
 
 =head1 NAME
 
-Cofra - Common object framework for Perl 6
+Cofra - Common object framework for Raku
 
 =head1 DESCRIPTION
 
